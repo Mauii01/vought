@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA Terminal - Tappa 5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header class="terminal-header"><div class="header-text"><h1>CIA SECURE UPLINK</h1><p>UPLINK: LIVELLO 5 // TARGET: CHIESA VECCHIA</p></div></header>
+        <main class="chat-box" id="chatBox">
+            <div class="message incoming">
+                <div class="sender">AGENTE MALLORY [CIA]:</div>
+                <div class="bubble">La Vought sapeva tutto dei preti e dei politici locali perché li spiava dall'interno delle mura sacre. Chi è l'agente della sicurezza Vought in grado di rendersi invisibile che ha redatto quel rapporto di sorveglianza?</div>
+            </div>
+        </main>
+        <footer class="terminal-input-area"><span class="prompt">&gt;_</span><input type="text" id="userInput" placeholder="Inserisci il Super invisibile..."><button onclick="checkCode()">INVIA</button></footer>
+    </div>
+    <script>
+        function checkCode() {
+            let input = document.getElementById('userInput').value.trim().toUpperCase();
+            if(input === "TRANSLUCENT") {
+                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Quel guardone di Translucent... viscido bastardo. Ha usato i ricatti per estorcere concessioni edilizie storiche alla giunta degli anni '90. Gli atti ufficiali estorti sono bloccati negli archivi del COMUNE VECCHIO. Andate là a prenderli.</div></div>`;
+                setTimeout(() => { window.location.href = "tappa6.html"; }, 4000);
+            } else { alert("Bersaglio errato."); }
+        }
+    </script>
+</body>
+</html>

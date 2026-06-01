@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA Terminal - Tappa 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header class="terminal-header"><div class="header-text"><h1>CIA SECURE UPLINK</h1><p>UPLINK: LIVELLO 4 // TARGET: POSTE CENTRALI</p></div></header>
+        <main class="chat-box" id="chatBox">
+            <div class="message incoming">
+                <div class="sender">AGENTE MALLORY [CIA]:</div>
+                <div class="bubble">Se avete preso la busta anonima alle Poste, apritela. La Vought sta finanziando una campagna religiosa di facciata basata su falsi miracoli medici. Quale Super "predicatore" elastico è il beneficiario segreto di questi soldi?</div>
+            </div>
+        </main>
+        <footer class="terminal-input-area"><span class="prompt">&gt;_</span><input type="text" id="userInput" placeholder="Inserisci il Super predicatore..."><button onclick="checkCode()">INVIA</button></footer>
+    </div>
+    <script>
+        function checkCode() {
+            let input = document.getElementById('userInput').value.trim().toUpperCase();
+            if(input === "EZEKIEL") {
+                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Centro. Ezekiel usa il palcoscenico della fede per coprire il traffico. I soldi delle Poste servono a pagare la parrocchia storica che ospita lo show. Correte alla CHIESA VECCHIA e cercate le note di sorveglianza nascoste.</div></div>`;
+                setTimeout(() => { window.location.href = "tappa5.html"; }, 4000);
+            } else { alert("Input non valido."); }
+        }
+    </script>
+</body>
+</html>

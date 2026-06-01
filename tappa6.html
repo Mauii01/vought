@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA Terminal - Tappa 7</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header class="terminal-header"><div class="header-text"><h1>CIA SECURE UPLINK</h1><p>UPLINK: LIVELLO 7 // TARGET: COMUNE NUOVO (SERVER)</p></div></header>
+        <main class="chat-box" id="chatBox">
+            <div class="message incoming">
+                <div class="sender">AGENTE MALLORY [CIA]:</div>
+                <div class="bubble">ALLERTA MASSIMA. Siete penetrati nel server centrale. Abbiamo estratto un ordine esecutivo militare spaventoso: c'è un mandato di eliminazione fisica per tutti i civili che sanno del Composto V. Chi ha firmato questo ordine spietato in cima al foglio? Rispondete subito!</div>
+            </div>
+        </main>
+        <footer class="terminal-input-area"><span class="prompt">&gt;_</span><input type="text" id="userInput" placeholder="CHI HA FIRMATO L'ORDINE?"><button onclick="checkCode()">INVIA</button></footer>
+    </div>
+    <script>
+        function checkCode() {
+            let input = document.getElementById('userInput').value.trim().toUpperCase();
+            if(input === "PATRIOTA" || input === "HOMELANDER") {
+                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Mio Dio... Patriota in persona vi vuole morti. Non c'è tempo, scappate! L'intercettazione dice che usano i camion merci di un discount locale per contrabbandare le fiale rimaste. Il punto di estrazione finale è il parcheggio merci del LIDL. Correte lì, prendete il Composto V rimasto e chiudiamo la faccenda! Connessione interrotta da remoto... SOLDIERS, OUT.</div></div>`;
+                // Nessun reindirizzamento, la chat si ferma qui perché hanno scoperto la meta finale della caccia al tesoro!
+            } else { alert("ACCESSO NEGATO: FIRMA NON AUTENTICATA."); }
+        }
+    </script>
+</body>
+</html>

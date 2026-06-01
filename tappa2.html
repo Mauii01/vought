@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA Terminal - Tappa 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header class="terminal-header"><div class="header-text"><h1>CIA SECURE UPLINK</h1><p>UPLINK: LIVELLO 3 // TARGET: AREA CANI</p></div></header>
+        <main class="chat-box" id="chatBox">
+            <div class="message incoming">
+                <div class="sender">AGENTE MALLORY [CIA]:</div>
+                <div class="bubble">Avete recuperato le fiale blu? Ottimo. Insieme alle bombole dovrebbe esserci un foglio di via della logistica ambientale della Vought. Chi è il Super marittimo che ha firmato e autorizzato lo scarico clandestino? Inserisci il suo nome.</div>
+            </div>
+        </main>
+        <footer class="terminal-input-area"><span class="prompt">&gt;_</span><input type="text" id="userInput" placeholder="Chi ha firmato il documento?"><button onclick="checkCode()">INVIA</button></footer>
+    </div>
+    <script>
+        function checkCode() {
+            let input = document.getElementById('userInput').value.trim().toUpperCase();
+            if(input === "ABISSO" || input === "THE DEEP") {
+                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Sospetto confermato. Quello smidollato dell'Abisso prende mazzette per inquinare la terraferma. I pagamenti cartacei non tracciabili passano per il centro logistico postale della città. Andate alle POSTE e cercate la busta della liquidazione.</div></div>`;
+                setTimeout(() => { window.location.href = "tappa4.html"; }, 4000);
+            } else { alert("Nome errato."); }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIA Terminal - Tappa 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header class="terminal-header">
+            <div class="header-text">
+                <h1>CIA SECURE UPLINK</h1>
+                <p>UPLINK: LIVELLO 1 // TARGET: ACCESSO INIZIALE</p>
+            </div>
+            <div class="status-indicator"><span class="blink-dot"></span> AREA 1</div>
+        </header>
+        <main class="chat-box" id="chatBox">
+            <div class="system-message">*** DISPOSITIVO CONNESSO ALLA RETE DI GRACE MALLORY ***</div>
+            <div class="message incoming">
+                <div class="sender">AGENTE MALLORY [CIA]:</div>
+                <div class="bubble">Qui Mallory. Butcher mi ha detto che siete operativi sul campo. Abbiamo intercettato un insabbiamento su A-Train. Trovate il nome della vittima civile investita nei documenti per sbloccare la traccia dei flussi del Composto V. Inseritela qui sotto.</div>
+            </div>
+        </main>
+        <footer class="terminal-input-area">
+            <span class="prompt">&gt;_</span>
+            <input type="text" id="userInput" placeholder="Inserisci il nome della vittima...">
+            <button onclick="checkCode()">INVIA</button>
+        </footer>
+    </div>
+    <script>
+        function checkCode() {
+            let input = document.getElementById('userInput').value.trim().toUpperCase();
+            if(input === "ROBIN") {
+                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Codice Corretto. Identità confermata: Robin Ward. Caricamento mappa logistica degli spacciatori... Muoversi immediatamente verso il PARCO DROGATI. Reindirizzamento uplink in corso...</div></div>`;
+                setTimeout(() => { window.location.href = "tappa2.html"; }, 4000);
+            } else { alert("ERRORE ACCESSO: Dati non corrispondenti."); }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA Terminal - Tappa 6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header class="terminal-header"><div class="header-text"><h1>CIA SECURE UPLINK</h1><p>UPLINK: LIVELLO 6 // TARGET: COMUNE VECCHIO</p></div></header>
+        <main class="chat-box" id="chatBox">
+            <div class="message incoming">
+                <div class="sender">AGENTE MALLORY [CIA]:</div>
+                <div class="bubble">Siete nell'ex municipio. Il documento di transazione legale (NDA) parla di una liquidazione da 1 milione e mezzo di euro per coprire la distruzione di un intero albergo durante una notte folle. Quale Super donna dei Sette ha causato il disastro?</div>
+            </div>
+        </main>
+        <footer class="terminal-input-area"><span class="prompt">&gt;_</span><input type="text" id="userInput" placeholder="Inserisci la Super donna..."><button onclick="checkCode()">INVIA</button></footer>
+    </div>
+    <script>
+        function checkCode() {
+            let input = document.getElementById('userInput').value.trim().toUpperCase();
+            if(input === "QUEEN MAEVE" || input === "MAEVE") {
+                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Bene, Maeve ha colpito ancora e la Vought ha comprato il silenzio dei vecchi impiegati. Attenzione: l'accordo dice che i faldoni aggiornati e i file crittografati sono stati migrati nei server centrali digitali. Dirigetevi subito al COMUNE NUOVO. Il cerchio si stringe.</div></div>`;
+                setTimeout(() => { window.location.href = "tappa7.html"; }, 4000);
+            } else { alert("Identità non corrispondente."); }
+        }
+    </script>
+</body>
+</html>
