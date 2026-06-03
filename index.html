@@ -8,34 +8,58 @@
 </head>
 <body>
     <div class="scanlines"></div>
+    
     <div class="terminal-container">
-        <header class="terminal-header">
+        <div class="terminal-header">
             <div class="header-text">
                 <h1>CIA SECURE UPLINK</h1>
                 <p>UPLINK: LIVELLO 1 // TARGET: ACCESSO INIZIALE</p>
             </div>
             <div class="status-indicator"><span class="blink-dot"></span> AREA 1</div>
-        </header>
-        <main class="chat-box" id="chatBox">
+        </div>
+        
+        <div class="chat-box" id="chatBox">
             <div class="system-message">*** DISPOSITIVO CONNESSO ALLA RETE DI GRACE MALLORY ***</div>
             <div class="message incoming">
                 <div class="sender">AGENTE MALLORY [CIA]:</div>
                 <div class="bubble">Qui Mallory. Butcher mi ha detto che siete operativi sul campo. Abbiamo intercettato un insabbiamento su A-Train. Trovate il nome della vittima civile investita nei documenti per sbloccare la traccia dei flussi del Composto V. Inseritela qui sotto.</div>
             </div>
-        </main>
-        <footer class="terminal-input-area">
+        </div>
+        
+        <div class="terminal-input-area">
             <span class="prompt">&gt;_</span>
-            <input type="text" id="userInput" placeholder="Inserisci il nome della vittima...">
+            <input type="text" id="userInput" placeholder="Inserisci il nome..." autocomplete="off">
             <button onclick="checkCode()">INVIA</button>
-        </footer>
+        </div>
     </div>
+
     <script>
         function checkCode() {
             let input = document.getElementById('userInput').value.trim().toUpperCase();
+            
             if(input === "ROBIN") {
-                document.getElementById('chatBox').innerHTML += `<div class="message outgoing"><div class="bubble">${input}</div></div><div class="message incoming"><div class="sender">AGENTE MALLORY [CIA]:</div><div class="bubble">Codice Corretto. Identità confermata: Robin Ward. Caricamento mappa logistica degli spacciatori... Muoversi immediatamente verso il PARCO DROGATI. Reindirizzamento uplink in corso...</div></div>`;
-                setTimeout(() => { window.location.href = "tappa1.html"; }, 4000);
-            } else { alert("ERRORE ACCESSO: Dati non corrispondenti."); }
+                // Inserisce la risposta dei ragazzi e il feedback di Mallory
+                document.getElementById('chatBox').innerHTML += `
+                    <div class="message outgoing">
+                        <div class="bubble">${input}</div>
+                    </div>
+                    <div class="message incoming">
+                        <div class="sender">AGENTE MALLORY [CIA]:</div>
+                        <div class="bubble">Codice Corretto. Identità confermata: Robin Ward. Caricamento mappa logistica... Muoversi immediatamente verso il PARCO DROGATI. Reindirizzamento uplink...</div>
+                    </div>`;
+                
+                // Forza la chat a scorrere in basso per mostrare il messaggio di Mallory su mobile
+                let chatBox = document.getElementById('chatBox');
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // Corretto il reindirizzamento: manda alla pagina della Tappa 2!
+                setTimeout(() => { 
+                    window.location.href = "tappa2.html"; 
+                }, 4000);
+                
+            } else { 
+                alert("ERRORE ACCESSO: Dati non corrispondenti."); 
+            }
         }
     </script>
 </body>

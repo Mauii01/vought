@@ -8,11 +8,74 @@ body {
     background-color: #030702;
     color: #00ff00;
     font-family: 'Courier New', Courier, monospace;
-    height: 100vh;
+    min-height: 100vh;
+    /* Usa lo standard moderno per l'altezza mobile, evitando i bug di Safari/Chrome */
+    min-height: -webkit-fill-available; 
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    padding: 10px;
+    overflow: hidden; /* Impedisce alla pagina intera di scorrere */
+}
+
+.terminal-container {
+    width: 100%;
+    max-width: 800px;
+    height: 92vh; /* Lascia un piccolo margine sopra e sotto */
+    background-color: rgba(5, 15, 5, 0.95);
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    display: flex;
+    flex-direction: column; /* Mette Header, Chat e Input in riga verticale */
+    border-radius: 4px;
+    position: relative;
+}
+
+.chat-box {
+    flex: 1; /* Prende TUTTO lo spazio centrale rimasto, spingendo l'input in fondo */
+    padding: 15px;
+    overflow-y: auto; /* Solo la chat deve scorrere se ci sono troppi messaggi */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-bottom: 1px solid #00ff00;
+    -webkit-overflow-scrolling: touch;
+}
+
+.terminal-input-area {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: rgba(0, 20, 0, 0.8);
+    gap: 10px;
+    width: 100%;
+    height: 60px; /* Altezza fissa bloccata in fondo */
+    box-sizing: border-box;
+}
+
+/* Ottimizzazione per l'input di testo per non farlo tagliare */
+.terminal-input-area input {
+    flex: 1; /* Si allarga prendendo tutto lo spazio prima del bottone */
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px; /* Evita lo zoom automatico su iPhone */
+    padding: 5px;
+    min-width: 0; /* Impedisce all'input di spaccare il flex layout su schermi piccoli */
+}
+
+.terminal-input-area button {
+    background-color: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Impedisce al bottone di rimpicciolirsi */
 }
 
 .scanlines {
@@ -25,9 +88,9 @@ body {
 }
 
 .terminal-container {
-    width: 95%;
-    max-width: 800px;
-    height: 85vh;
+    width: 100%; /* Occupa tutto lo spazio disponibile sui telefoni piccoli */
+    max-width: 800px; /* Si ferma a 800px sui PC */
+    height: 90vh; /* Sfrutta al massimo l'altezza dello schermo */
     background-color: rgba(5, 15, 5, 0.95);
     border: 2px solid #00ff00;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
@@ -39,37 +102,37 @@ body {
 .terminal-header {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 12px; /* Ridotto leggermente per il mobile */
     border-bottom: 2px solid #00ff00;
     background-color: rgba(0, 40, 0, 0.3);
 }
 
 .header-text {
     flex-grow: 1;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .header-text h1 {
-    font-size: 1.1rem;
-    letter-spacing: 2px;
+    font-size: 1rem; /* Scalato per non andare a capo sui telefoni stretti */
+    letter-spacing: 1px;
     text-shadow: 0 0 5px #00ff00;
 }
 
 .header-text p {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #88ff88;
     margin-top: 3px;
 }
 
 .status-indicator {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .blink-dot {
-    width: 10px; height: 10px;
+    width: 8px; height: 8px;
     background-color: #ff0000;
     border-radius: 50%;
     box-shadow: 0 0 8px #ff0000;
@@ -78,40 +141,42 @@ body {
 
 .chat-box {
     flex-grow: 1;
-    padding: 20px;
+    padding: 15px; /* Ottimizzato spazio interno */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     border-bottom: 1px solid #00ff00;
+    /* Fluidità di scorrimento su iOS */
+    -webkit-overflow-scrolling: touch; 
 }
 
 .system-message {
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #88ff88;
     background-color: rgba(0, 255, 0, 0.05);
-    padding: 8px;
+    padding: 6px;
     border: 1px dashed #00ff00;
 }
 
 .message {
     display: flex;
     flex-direction: column;
-    max-width: 85%;
+    max-width: 90%; /* Allargato leggermente per leggere meglio sui display stretti */
 }
 
 .sender {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: bold;
     margin-bottom: 4px;
 }
 
 .bubble {
-    padding: 12px;
+    padding: 10px;
     border-radius: 4px;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.85rem;
+    line-height: 1.3;
 }
 
 .message.incoming { align-self: flex-start; }
@@ -125,22 +190,54 @@ body {
 .terminal-input-area {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 12px;
     background-color: rgba(0, 20, 0, 0.5);
-    gap: 10px;
+    gap: 8px;
 }
 
-.prompt { font-size: 1.1rem; font-weight: bold; }
+.prompt { font-size: 1rem; font-weight: bold; }
+
 .terminal-input-area input {
-    flex-grow: 1; background: transparent; border: none; outline: none;
-    color: #00ff00; font-family: 'Courier New', Courier, monospace; font-size: 1rem;
+    flex-grow: 1; 
+    background: transparent; 
+    border: none; 
+    outline: none;
+    color: #00ff00; 
+    font-family: 'Courier New', Courier, monospace; 
+    /* ⚠️ IMPORTANTE: Almeno 16px per evitare lo zoom forzato automatico della pagina su iPhone */
+    font-size: 16px; 
+    padding: 4px 0;
 }
 
 .terminal-input-area button {
-    background-color: transparent; border: 1px solid #00ff00; color: #00ff00;
-    padding: 6px 15px; cursor: pointer; font-family: 'Courier New', Courier, monospace;
+    background-color: transparent; 
+    border: 1px solid #00ff00; 
+    color: #00ff00;
+    padding: 8px 16px; /* Bottone leggermente più grande per essere cliccato bene con le dita */
+    cursor: pointer; 
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    /* Evita comportamenti di stile strani su Safari mobile */
+    -webkit-appearance: none;
 }
 .terminal-input-area button:hover { background-color: #00ff00; color: #030702; }
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* 📱 Ottimizzazioni specifiche per schermi piccolissimi (sotto i 480px di larghezza) */
+@media (max-width: 480px) {
+    .terminal-container {
+        height: 95vh; /* Usa quasi tutto lo schermo verticale */
+    }
+    .header-text p {
+        display: none; /* Nasconde il sottotitolo secondario per risparmiare spazio utile in alto */
+    }
+    .bubble {
+        font-size: 0.8rem; /* Testo dei messaggi leggermente più compatto */
+    }
+    .terminal-input-area {
+        padding: 10px;
+    }
+}
