@@ -1,43 +1,20 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background-color: #030702;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    /* Gestione dinamica dell'altezza per i browser mobile */
-    min-height: 100vh;
-    min-height: -webkit-fill-available; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.scanlines {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-    background-size: 100% 4px;
-    z-index: 999;
-    pointer-events: none;
-}
-
 .terminal-container {
     width: 100%;
     max-width: 800px;
-    /* Cambiato: usa max-height invece di height fisso. 
-       Così se la chat è corta il box si adatta, se è lunga si ferma prima dei bordi dello schermo */
-    max-height: 90vh; 
+    
+    /* 🌟 IL SEGRETO AUTOMATICO: 
+       Usa il 90% dell'altezza DINAMICA dello schermo. 
+       Si adatta da solo se esce la tastiera o se scompare la barra di navigazione! */
+    height: 90dvh; 
+    height: 90vh; /* Ruolo di riserva per i browser più vecchi */
+    
     background-color: rgba(5, 15, 5, 0.95);
     border: 2px solid #00ff00;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Dispone gli elementi uno sotto l'altro in automatico */
     border-radius: 4px;
+    overflow: hidden;
 }
 
 .terminal-header {
@@ -46,7 +23,7 @@ body {
     padding: 12px;
     border-bottom: 2px solid #00ff00;
     background-color: rgba(0, 40, 0, 0.3);
-    flex-shrink: 0; /* Impedisce all'header di rimpicciolirsi */
+    flex-shrink: 0; /* Impedisce all'header di schiacciarsi */
 }
 
 .header-text {
@@ -82,10 +59,12 @@ body {
 }
 
 .chat-box {
-    /* Cambiato: permette al box di rimpicciolirsi o allungarsi in base ai messaggi presenti */
-    flex: 1 1 auto; 
+    /* 🌟 SPANZO AUTOMATICO:
+       Dice alla chat di espandersi e prendersi tutto lo spazio vuoto, 
+       spingendo l'input verso il basso in automatico, senza posizionamenti fissi. */
+    flex: 1; 
     padding: 15px;
-    overflow-y: auto;
+    overflow-y: auto; /* Solo la chat crea la barra di scorrimento se si allunga */
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -129,14 +108,17 @@ body {
 .message.outgoing .sender { color: #00ffff; text-shadow: 0 0 3px #00ffff; }
 .message.outgoing .bubble { background-color: rgba(0, 40, 60, 0.4); border: 1px solid #00ffff; color: #00ffff; }
 
+/* 🌟 BARRA INPUT AUTOMATICA:
+   Non serve più bloccarla con posizioni matematiche strane. 
+   Essendo dentro il flusso flex, sta sempre e comunque sotto la chat box. */
 .terminal-input-area {
     display: flex;
     align-items: center;
     padding: 12px;
-    background-color: rgba(0, 20, 0, 0.8);
+    background-color: rgba(0, 20, 0, 0.5);
     gap: 8px;
     width: 100%;
-    flex-shrink: 0; /* Mantiene la barra di input intatta senza schiacciarla */
+    flex-shrink: 0; /* Rimane protetta e non si fa schiacciare dai messaggi */
 }
 
 .prompt { font-size: 1rem; font-weight: bold; flex-shrink: 0; }
@@ -148,7 +130,7 @@ body {
     outline: none;
     color: #00ff00;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 16px; /* Blocca lo zoom automatico su mobile */
+    font-size: 16px; /* Evita lo zoom automatico su iPhone */
     padding: 6px 0;
     min-width: 0;
 }
@@ -172,6 +154,6 @@ body {
 
 @media (max-width: 480px) {
     .header-text p {
-        display: none; /* Risparmia spazio verticale sui telefoni piccoli */
+        display: none;
     }
 }
